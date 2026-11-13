@@ -1,4 +1,4 @@
-# GameRealm: Grounding World Understanding in Games
+# GameRealm: Grounding Visual Learning in Interactive Games
 
 GameRealm brings visual observations, spatial structure, and interaction signals
 from interactive game environments together to support research in world
