@@ -1,0 +1,367 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#ffffff">
+  <meta name="description" content="GameRealm — Grounding World Understanding in Games. Explore world models, 3D reconstruction, and point tracking.">
+  <meta property="og:title" content="GameRealm: Learning World Dynamics and Visual Geometry from Interactive Games">
+  <meta property="og:description" content="From interactive worlds to grounded intelligence.">
+  <meta property="og:type" content="website">
+  <meta property="og:locale" content="en_US">
+  <meta name="color-scheme" content="light">
+  <title>GameRealm: Learning World Dynamics and Visual Geometry </title>
+  <link rel="icon" href="assets/favicon.ico?v=124886819651" type="image/x-icon" sizes="16x16 32x32 48x48">
+  <link rel="icon" href="assets/favicon.svg?v=b82a34a2f42e" type="image/svg+xml">
+  <link rel="stylesheet" href="assets/site.css">
+  <script src="content.js" defer></script>
+  <script src="assets/media-manifest.js" defer></script>
+  <script src="assets/media-loader.js" defer></script>
+  <script src="assets/tracking-compare.js" defer></script>
+  <script src="assets/world-model-gallery.js" defer></script>
+  <script src="assets/reconstruction-gallery.js" defer></script>
+  <script src="assets/hierarchical-navigation.js" defer></script>
+  <script src="assets/site.js" defer></script>
+</head>
+<body id="top">
+  <a class="skip-link" href="#overview">Skip to content</a>
+  <svg class="icon-definitions" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+    <symbol id="icon-arrow" viewBox="0 0 24 24"><path d="M6 18 18 6M6 6h12v12"/></symbol>
+    <symbol id="icon-world" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><ellipse cx="12" cy="12" rx="4" ry="9"/><path d="M3 12h18M5 6.5h14M5 17.5h14"/></symbol>
+    <symbol id="icon-cube" viewBox="0 0 24 24"><path d="m12 2 9 5v10l-9 5-9-5V7l9-5ZM3 7l9 5 9-5m-9 5v10"/></symbol>
+    <symbol id="icon-track" viewBox="0 0 24 24"><circle cx="5" cy="18" r="3"/><circle cx="19" cy="6" r="3"/><path d="M5 15V9a3 3 0 0 1 6 0v6a4 4 0 0 0 8 0V9"/></symbol>
+  </svg>
+  <div class="navigation-wrap">
+    <div class="navigation-inner page-width">
+      <a class="site-logo" href="#top"><img src="assets/shai-logo4.png" alt="Shanghai Artificial Intelligence Laboratory" width="4647" height="536" decoding="async"></a>
+      <nav class="section-nav" aria-label="Main navigation">
+        <a class="nav-top-link" href="#top" data-nav-section="#top" aria-current="location">Overview</a>
+        <div class="nav-item" data-nav-disclosure>
+          <button class="nav-top-link nav-menu-toggle" type="button" data-nav-toggle data-nav-section="#video-showcase" aria-expanded="false" aria-controls="dataset-nav-menu">Dataset<svg class="nav-chevron" viewBox="0 0 16 16" aria-hidden="true"><path d="m4 6 4 4 4-4"/></svg></button>
+          <div class="nav-menu" id="dataset-nav-menu" role="group" aria-label="Dataset sections" hidden>
+            <div class="nav-branch" data-nav-disclosure>
+              <div class="nav-branch-header">
+                <a class="nav-menu-link" href="#showcase-title">Content Diversity</a>
+                <button class="nav-branch-toggle" type="button" data-nav-toggle aria-expanded="false" aria-controls="content-nav-menu" aria-label="Expand Content Diversity options"><svg class="nav-chevron" viewBox="0 0 16 16" aria-hidden="true"><path d="m4 6 4 4 4-4"/></svg></button>
+              </div>
+              <div class="nav-submenu" id="content-nav-menu" role="group" aria-label="Content Diversity options" hidden>
+                <a class="nav-menu-link" href="#showcase-title" data-showcase-category="scene">Scene</a>
+                <a class="nav-menu-link" href="#showcase-title" data-showcase-category="weather">Weather</a>
+                <a class="nav-menu-link" href="#showcase-title" data-showcase-category="character">Character</a>
+                <a class="nav-menu-link" href="#showcase-title" data-showcase-category="interaction">Interaction</a>
+              </div>
+            </div>
+            <div class="nav-branch" data-nav-disclosure>
+              <div class="nav-branch-header">
+                <a class="nav-menu-link" href="#viewpoint-diversity-title">Viewpoint Diversity</a>
+                <button class="nav-branch-toggle" type="button" data-nav-toggle aria-expanded="false" aria-controls="viewpoint-nav-menu" aria-label="Expand Viewpoint Diversity options"><svg class="nav-chevron" viewBox="0 0 16 16" aria-hidden="true"><path d="m4 6 4 4 4-4"/></svg></button>
+              </div>
+              <div class="nav-submenu" id="viewpoint-nav-menu" role="group" aria-label="Viewpoint Diversity options" hidden>
+                <a class="nav-menu-link" href="#viewpoint-tabs" data-viewpoint="single-view">Single-View</a>
+                <a class="nav-menu-link" href="#viewpoint-tabs" data-viewpoint="stereo">Stereo</a>
+                <a class="nav-menu-link" href="#viewpoint-tabs" data-viewpoint="multi-view">Multi-View</a>
+                <a class="nav-menu-link" href="#viewpoint-tabs" data-viewpoint="panoramic">Panoramic</a>
+              </div>
+            </div>
+            <div class="nav-branch" data-nav-disclosure>
+              <div class="nav-branch-header">
+                <a class="nav-menu-link" href="#modality-diversity-title">Modality Diversity</a>
+                <button class="nav-branch-toggle" type="button" data-nav-toggle aria-expanded="false" aria-controls="modality-nav-menu" aria-label="Expand Modality Diversity options"><svg class="nav-chevron" viewBox="0 0 16 16" aria-hidden="true"><path d="m4 6 4 4 4-4"/></svg></button>
+              </div>
+              <div class="nav-submenu" id="modality-nav-menu" role="group" aria-label="Modality Diversity options" hidden>
+                <a class="nav-menu-link" href="#modality-tabs" data-modality-select="depth">Depth</a>
+                <a class="nav-menu-link" href="#modality-tabs" data-modality-select="camera">Camera</a>
+                <a class="nav-menu-link" href="#modality-tabs" data-modality-select="tracking">Tracking</a>
+                <a class="nav-menu-link" href="#modality-tabs" data-modality-select="audio">Audio</a>
+                <a class="nav-menu-link" href="#modality-tabs" data-modality-select="text">Text</a>
+                <a class="nav-menu-link" href="#modality-tabs" data-modality-select="keypress">Keypress</a>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="nav-item" data-nav-disclosure>
+          <button class="nav-top-link nav-menu-toggle" type="button" data-nav-toggle data-nav-section="#finetuned-models" aria-expanded="false" aria-controls="models-nav-menu">Models<svg class="nav-chevron" viewBox="0 0 16 16" aria-hidden="true"><path d="m4 6 4 4 4-4"/></svg></button>
+          <div class="nav-menu" id="models-nav-menu" role="group" aria-label="Model directions" hidden>
+            <a class="nav-menu-link" href="#finetuned-models" data-model-select="world-model">Interactive World Model</a>
+            <a class="nav-menu-link" href="#finetuned-models" data-model-select="visual-geometry">Visual Geometry Learning</a>
+          </div>
+        </div>
+        <a class="nav-top-link" href="#resources" data-nav-section="#resources">Resources</a>
+      </nav>
+    </div>
+  </div>
+  <header class="masthead page-width">
+    <!-- <a class="project-label" href="#top"><span class="project-dot"></span> A WORLD UNDERSTANDING RESEARCH PROJECT</a> -->
+    <h1 >GameRealm: Grounding World Understanding in Games </h1>
+    <!-- <p class="project-tagline" id="hero-tagline">Grounding World Understanding in Games</p> -->
+    <div class="authors" id="authors" hidden></div>
+  </header>
+  <main class="page-width">
+    <div class="resource-actions" aria-label="Project resources">
+      <a class="pill resource-link" data-resource="code" href="https://github.com/weiguangzhao/GameRealm" target="_blank" rel="noopener noreferrer"><img class="icon brand-icon" src="assets/icons/github.svg" alt="" width="18" height="18"> GitHub</a>
+      <a class="pill resource-link" role="link" data-resource="paper" aria-disabled="true" tabindex="-1"><img class="icon brand-icon" src="assets/icons/arxiv.svg" alt="" width="18" height="18"> Technical Report <span class="soon">Soon</span></a>
+      <a class="pill resource-link" role="link" data-resource="dataset" aria-disabled="true" tabindex="-1"><img class="icon brand-icon" src="assets/icons/huggingface.svg" alt="" width="18" height="18"> Huggingface <span class="soon">Soon</span></a>
+      <a class="pill pill-primary" href="#video-showcase">Explore demos <svg class="icon" aria-hidden="true"><use href="#icon-arrow"/></svg></a>
+    </div>
+    <section class="hero" id="overview" aria-label="GameRealm project preview">
+      <div class="hero-art" aria-hidden="true"><div class="world-glow"></div><canvas id="world-canvas"></canvas><div class="hero-vignette"></div></div>
+      <video class="hero-video" id="hero-video" controls playsinline preload="none" hidden></video>
+      <div class="hero-overlay" id="hero-overlay">
+        <div class="hero-topline"><span class="scene-brand"><svg class="icon" aria-hidden="true"><use href="#icon-cube"/></svg> GameRealm <span>/</span> Research preview</span><span class="concept-badge">CONCEPT VISUALIZATION</span></div>
+        <div class="hero-copy"><p class="hero-eyebrow">OBSERVE. INTERACT. UNDERSTAND.</p><p class="hero-display">A world beyond<br>the frame.</p><p class="hero-subtitle">From interactive worlds to grounded intelligence.</p><a class="hero-explore" href="#video-showcase" aria-label="Explore GameRealm video demos"><svg class="icon" aria-hidden="true"><use href="#icon-arrow"/></svg></a></div>
+        <div class="hero-bottom"><span id="scene-label">Games · Geometry · Intelligence</span><button id="motion-toggle" type="button" aria-label="Pause visual animation" aria-pressed="false"><svg viewBox="0 0 16 16" width="12" height="12" aria-hidden="true"><path d="M5 3v10M11 3v10" stroke="currentColor" stroke-width="2" fill="none"/></svg><span>Pause</span></button></div>
+      </div>
+    </section>
+    <section class="video-showcase" id="video-showcase" aria-labelledby="dataset-statistics-title">
+      <div class="section-heading">
+        <h2 id="dataset-statistics-title">GameRealm Dataset</h2>
+        <p class="section-lead">GameRealm brings together diverse game environments, multiple viewpoints, and multimodal observations, including RGB, depth, camera parameters, point tracks, audio, text, and control inputs.</p>
+      </div>
+      <div class="showcase-heading">
+        <h3 id="showcase-title">Content Diversity</h3>
+      </div>
+      <div class="showcase-browser">
+        <nav class="showcase-directory" aria-label="Video categories">
+          <div class="showcase-directory-inner" id="showcase-directory"><noscript>Enable JavaScript to browse the video categories.</noscript></div>
+        </nav>
+        <div class="showcase-player" id="showcase-player" role="region" aria-labelledby="showcase-current-group">
+          <div class="showcase-player-header">
+            <span id="showcase-current-group">Interaction</span>
+            <div class="showcase-thumbnail-slider">
+              <button class="showcase-thumbnail-arrow" id="showcase-thumbnails-prev" type="button" aria-label="Scroll thumbnails left" aria-controls="showcase-thumbnails" disabled><svg viewBox="0 0 20 20" aria-hidden="true"><path d="m12 5-5 5 5 5"/></svg></button>
+              <div class="showcase-thumbnails" id="showcase-thumbnails" role="group" aria-label="Video thumbnails" tabindex="0"></div>
+              <button class="showcase-thumbnail-arrow" id="showcase-thumbnails-next" type="button" aria-label="Scroll thumbnails right" aria-controls="showcase-thumbnails" disabled><svg viewBox="0 0 20 20" aria-hidden="true"><path d="m8 5 5 5-5 5"/></svg></button>
+            </div>
+          </div>
+          <div class="showcase-viewport" id="showcase-viewport">
+            <div class="showcase-empty" id="showcase-empty">
+              <span class="showcase-play-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="m9 6 9 6-9 6Z"/></svg></span>
+              <p id="showcase-empty-title">Video to be added</p>
+              <span id="showcase-empty-note">Select a video from the thumbnails above.</span>
+            </div>
+            <button class="showcase-video-nav showcase-video-prev" id="showcase-video-prev" type="button" aria-label="Previous video" title="Previous video" aria-controls="showcase-player" disabled><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m15 5-7 7 7 7"/></svg></button>
+            <button class="showcase-video-nav showcase-video-next" id="showcase-video-next" type="button" aria-label="Next video" title="Next video" aria-controls="showcase-player" disabled><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m9 5 7 7-7 7"/></svg></button>
+          </div>
+          <p class="showcase-status" id="showcase-status" role="status" aria-live="polite" aria-atomic="true"></p>
+        </div>
+      </div>
+      <div class="showcase-heading modality-heading">
+        <h3 id="viewpoint-diversity-title">Viewpoint Diversity</h3>
+      </div>
+      <div class="view-grid">
+        <a class="view-card viewpoint-card-link" href="#viewpoint-tabs" data-viewpoint="single-view" aria-controls="viewpoint-panel"><div class="view-art view-single" aria-hidden="true"><span class="view-frame"></span><span class="view-horizon"></span><span class="view-sun"></span></div><h3>Single-view</h3><p>A first-person window into interactive environments.</p></a>
+        <a class="view-card viewpoint-card-link" href="#viewpoint-tabs" data-viewpoint="stereo" aria-controls="viewpoint-panel"><div class="view-art view-stereo" aria-hidden="true"><span class="view-frame"></span><span class="view-frame"></span><span class="view-connector"></span></div><h3>Stereo</h3><p>Paired perspectives for studying spatial structure.</p></a>
+        <a class="view-card viewpoint-card-link" href="#viewpoint-tabs" data-viewpoint="multi-view" aria-controls="viewpoint-panel"><div class="view-art view-multi" aria-hidden="true"><span class="view-cube"></span><span class="view-node node-one"></span><span class="view-node node-two"></span><span class="view-node node-three"></span></div><h3>Multi-view</h3><p>Complementary viewpoints of a shared scene.</p></a>
+        <a class="view-card viewpoint-card-link" href="#viewpoint-tabs" data-viewpoint="panoramic" aria-controls="viewpoint-panel"><div class="view-art view-pano" aria-hidden="true"><span class="pano-ring ring-one"></span><span class="pano-ring ring-two"></span><span class="pano-ring ring-three"></span><span class="pano-equator"></span></div><h3>Panoramic</h3><p>A wider context for immersive world understanding.</p></a>
+      </div>
+      <div class="research-tabs viewpoint-tabs" id="viewpoint-tabs" role="tablist" aria-labelledby="viewpoint-diversity-title">
+        <button type="button" role="tab" id="viewpoint-tab-single-view" aria-selected="false" aria-controls="viewpoint-panel" data-modality="single-view" tabindex="-1">Single-View</button>
+        <button type="button" role="tab" id="viewpoint-tab-stereo" aria-selected="false" aria-controls="viewpoint-panel" data-modality="stereo" tabindex="-1">Stereo</button>
+        <button type="button" role="tab" id="viewpoint-tab-multi-view" aria-selected="true" aria-controls="viewpoint-panel" data-modality="multi-view" tabindex="0">Multi-View</button>
+        <button type="button" role="tab" id="viewpoint-tab-panoramic" aria-selected="false" aria-controls="viewpoint-panel" data-modality="panoramic" tabindex="-1">Panoramic</button>
+      </div>
+      <div class="viewpoint-panel" id="viewpoint-panel" role="tabpanel" aria-labelledby="viewpoint-tab-multi-view" tabindex="0">
+        <div class="single-view-grid" id="single-view-grid" role="group" aria-label="Single-View videos" hidden></div>
+        <div class="stereo-grid" id="stereo-grid" role="group" aria-label="Stereo videos" hidden></div>
+        <div class="multi-view-grid" id="multi-view-grid" role="group" aria-label="Multi-View videos" hidden></div>
+        <div class="panoramic-grid" id="panoramic-grid" role="group" aria-label="Panoramic videos" hidden></div>
+        <div class="showcase-viewport" id="viewpoint-viewport">
+          <div class="showcase-empty" id="viewpoint-empty">
+            <span class="showcase-play-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="m9 6 9 6-9 6Z"/></svg></span>
+            <p id="viewpoint-empty-title">Multi-View video</p>
+            <span id="viewpoint-empty-note">Video to be added.</span>
+          </div>
+        </div>
+        <p class="showcase-status" id="viewpoint-status" role="status" aria-live="polite" aria-atomic="true"></p>
+      </div>
+      <div class="showcase-heading modality-heading">
+        <h3 id="modality-diversity-title">Modality Diversity</h3>
+      </div>
+      <div class="view-grid modality-grid" aria-label="Dataset modalities">
+        <a class="view-card modality-card-link" href="#modality-tabs" data-modality-select="depth" aria-controls="depth-panel">
+          <div class="view-art modality-art" aria-hidden="true">
+            <svg viewBox="0 0 140 100" focusable="false">
+              <rect x="24" y="17" width="92" height="66" rx="4"/>
+              <path class="modality-icon-fill" d="M25 67 44 53 60 60 81 32 115 58v24H25Z"/>
+              <path d="M25 72 45 61 61 66 83 43 115 64M25 78l21-9 16 5 23-20 30 17"/>
+              <path class="modality-icon-soft" d="M35 28h19m-19 6h12M124 26v49m-3-49h6m-6 49h6"/>
+            </svg>
+          </div>
+          <h3>Depth</h3><p><span class="gt-badge">GT</span> Per-pixel distance and scene structure.</p>
+        </a>
+        <a class="view-card modality-card-link" href="#modality-tabs" data-modality-select="camera" aria-controls="camera-panel">
+          <div class="view-art modality-art" aria-hidden="true">
+            <svg viewBox="0 0 140 100" focusable="false">
+              <path class="modality-icon-fill" d="m78 19 39 12-7 44-39-13Z"/>
+              <path d="m78 19 39 12-7 44-39-13Z"/>
+              <path class="modality-icon-soft" d="M35 69 78 19m-43 50 82-38M35 69l75 6M35 69l36-7" stroke-dasharray="3 4"/>
+              <rect x="17" y="58" width="24" height="21" rx="3"/>
+              <path class="modality-icon-fill" d="m41 64 10-5v19l-10-5Z"/>
+              <circle cx="29" cy="68.5" r="5"/>
+              <path class="modality-icon-soft" d="M29 79v12m-8 0h16"/>
+            </svg>
+          </div>
+          <h3>Camera</h3><p><span class="gt-badge">GT</span> Camera intrinsics and extrinsics.</p>
+        </a>
+        <a class="view-card modality-card-link" href="#modality-tabs" data-modality-select="tracking" aria-controls="tracking-panel">
+          <div class="view-art modality-art" aria-hidden="true">
+            <svg viewBox="0 0 140 100" focusable="false">
+              <path class="modality-icon-soft" d="M22 25h96M22 50h96M22 75h96M40 17v66m30-66v66m30-66v66" stroke-dasharray="2 5"/>
+              <path d="M25 75c21-42 56 10 87-47M25 54c27-25 54 19 87-5"/>
+              <path class="modality-icon-soft" d="M25 33c26-13 57 43 87 33"/>
+              <circle cx="25" cy="75" r="3"/><circle cx="25" cy="54" r="3"/>
+              <circle class="modality-icon-fill" cx="112" cy="28" r="5"/>
+              <circle class="modality-icon-fill" cx="112" cy="49" r="4"/>
+              <circle cx="112" cy="66" r="3"/>
+            </svg>
+          </div>
+          <h3>Tracking</h3><p><span class="gt-badge">GT</span> Point trajectories through space and time.</p>
+        </a>
+        <a class="view-card modality-card-link" href="#modality-tabs" data-modality-select="audio" aria-controls="audio-panel">
+          <div class="view-art modality-art" aria-hidden="true">
+            <svg viewBox="0 0 140 100" focusable="false">
+              <path class="modality-icon-soft" d="M16 50h108"/>
+              <path class="modality-waveform" d="M26 44v12m8-21v30m8-39v48m8-35v22m8-42v62m8-50v38m8-57v76m8-53v30m8-41v52m8-44v36m8-28v20m8-15v10"/>
+            </svg>
+          </div>
+          <h3>Audio</h3><p><span class="gt-badge">GT</span> Sound synchronized with visual observations.</p>
+        </a>
+        <a class="view-card modality-card-link" href="#modality-tabs" data-modality-select="text" aria-controls="text-panel">
+          <div class="view-art modality-art" aria-hidden="true">
+            <svg viewBox="0 0 140 100" focusable="false">
+              <path class="modality-icon-fill" d="M31 19h78a4 4 0 0 1 4 4v51a4 4 0 0 1-4 4H51L35 89V78h-4a4 4 0 0 1-4-4V23a4 4 0 0 1 4-4Z"/>
+              <path d="M42 35h52M42 47h57M42 59h37M87 59h12"/>
+              <path class="modality-icon-soft" d="M42 68h24"/>
+            </svg>
+          </div>
+          <h3>Text</h3><p><span class="gt-badge qwen-badge">Qwen</span> Language describing scenes and events.</p>
+        </a>
+        <a class="view-card modality-card-link" href="#modality-tabs" data-modality-select="keypress" aria-controls="keypress-panel">
+          <div class="view-art modality-art" aria-hidden="true">
+            <svg viewBox="0 0 140 100" focusable="false">
+              <g transform="translate(1 9) scale(.72)">
+                <rect x="56" y="17" width="28" height="25" rx="4"/>
+                <rect x="22" y="49" width="28" height="25" rx="4"/>
+                <rect class="modality-icon-fill" x="56" y="49" width="28" height="25" rx="4"/>
+                <rect x="90" y="49" width="28" height="25" rx="4"/>
+                <path d="m65 32 5-5 5 5m-36 24-5 5 5 5m26-7 5 5 5-5m26-3 5 5-5 5"/>
+                <path class="modality-icon-soft" d="M25 82h90m-52 6h14"/>
+              </g>
+              <rect class="modality-icon-fill" x="103" y="27" width="26" height="48" rx="13"/>
+              <path d="M116 27v6m0 9v5m-12 0h24"/>
+              <rect x="114.5" y="34" width="3" height="7" rx="1.5"/>
+            </svg>
+          </div>
+          <h3>Keypress</h3><p><span class="gt-badge">GT</span> Keyboard and mouse inputs aligned with gameplay.</p>
+        </a>
+      </div>
+      <div class="research-tabs modality-tabs" id="modality-tabs" role="group" aria-labelledby="modality-diversity-title">
+        <button type="button" id="modality-depth" aria-pressed="false" aria-controls="depth-panel" data-modality="depth">Depth</button>
+        <button type="button" id="modality-camera" aria-pressed="false" aria-controls="camera-panel" data-modality="camera">Camera</button>
+        <button type="button" id="modality-tracking" aria-pressed="true" aria-controls="tracking-panel" data-modality="tracking">Tracking</button>
+        <button type="button" id="modality-audio" aria-pressed="false" aria-controls="audio-panel" data-modality="audio">Audio</button>
+        <button type="button" id="modality-text" aria-pressed="false" aria-controls="text-panel" data-modality="text">Text</button>
+        <button type="button" id="modality-keypress" aria-pressed="false" aria-controls="keypress-panel" data-modality="keypress">Keypress</button>
+      </div>
+      <div class="depth-panel" id="depth-panel" role="region" aria-labelledby="modality-depth" hidden>
+        <div class="depth-grid" id="depth-grid"></div>
+      </div>
+      <div class="camera-panel" id="camera-panel" role="region" aria-labelledby="modality-camera" hidden>
+        <div class="camera-grid" id="camera-grid"></div>
+      </div>
+      <div class="tracking-panel" id="tracking-panel" role="region" aria-labelledby="modality-tracking" hidden>
+        <div class="tracking-grid" id="tracking-grid"></div>
+      </div>
+      <div class="audio-panel" id="audio-panel" role="region" aria-labelledby="modality-audio" hidden>
+        <div class="audio-grid" id="audio-grid"></div>
+      </div>
+      <div class="text-panel" id="text-panel" role="region" aria-labelledby="modality-text" hidden>
+        <div class="text-examples" id="text-examples"></div>
+      </div>
+      <div class="keypress-panel" id="keypress-panel" role="region" aria-labelledby="modality-keypress" hidden>
+        <div class="keypress-grid" id="keypress-grid"></div>
+      </div>
+    </section>
+    <!-- Project capability cards are temporarily disabled.
+    <section class="section overview" aria-label="Project capabilities">
+      <div class="principles">
+        <a href="#viewpoint-diversity-title" data-viewpoint="single-view"><svg class="feature-icon" aria-hidden="true"><use href="#icon-world"/></svg><h3>Interactive world models</h3><p>Understand how a world responds to actions.</p><span class="feature-link">Explore world models <span aria-hidden="true">↗</span></span></a>
+        <a href="#viewpoint-diversity-title" data-viewpoint="stereo"><svg class="feature-icon" aria-hidden="true"><use href="#icon-cube"/></svg><h3>3D reconstruction</h3><p>Connect visual observations with spatial structure.</p><span class="feature-link">Explore geometry <span aria-hidden="true">↗</span></span></a>
+        <a href="#modality-diversity-title" data-modality-select="tracking"><svg class="feature-icon" aria-hidden="true"><use href="#icon-track"/></svg><h3>Point tracking</h3><p>Follow motion and correspondence across time.</p><span class="feature-link">Explore motion <span aria-hidden="true">↗</span></span></a>
+      </div>
+    </section>
+    -->
+    <section class="section finetuned-models" id="finetuned-models" aria-labelledby="finetuned-models-title">
+      <div class="section-heading">
+        <h2 id="finetuned-models-title">Finetuned Models Based on GameRealm</h2>
+        <p class="section-lead">Explore models finetuned on GameRealm for interactive world modeling and visual geometry learning, with demonstrations of action-conditioned video generation, 3D reconstruction, and point tracking.</p>
+      </div>
+      <div class="view-grid model-direction-grid" role="group" aria-label="Model directions">
+        <a class="view-card model-card-link" href="#finetuned-model-tabs" data-model-select="world-model" aria-controls="finetuned-world-model-panel">
+          <div class="view-art modality-art" aria-hidden="true">
+            <svg viewBox="0 0 140 100" focusable="false">
+              <circle class="modality-icon-fill" cx="61" cy="46" r="29"/>
+              <ellipse cx="61" cy="46" rx="13" ry="29"/>
+              <ellipse cx="61" cy="46" rx="29" ry="11"/>
+              <path class="modality-icon-soft" d="M32 46h58M61 17v58"/>
+              <path class="modality-icon-fill" d="m84 51 25 20-12 2-6 11Z"/>
+              <path d="m98 77 7 10"/>
+              <path class="modality-icon-soft" d="m96 25 7-5m-1 17h9M84 16l2-8"/>
+            </svg>
+          </div>
+          <h3>Interactive World Model</h3>
+          <p>Predict how interactive worlds evolve under actions.</p>
+        </a>
+        <a class="view-card model-card-link" href="#finetuned-model-tabs" data-model-select="visual-geometry" aria-controls="finetuned-visual-geometry-panel">
+          <div class="view-art modality-art" aria-hidden="true">
+            <svg viewBox="0 0 140 100" focusable="false">
+              <path class="modality-icon-fill" d="m78 18 29 17-29 17-29-17Z"/>
+              <path d="M49 35v32l29 17 29-17V35M78 52v32"/>
+              <path class="modality-icon-soft" d="M78 18v32l29 17M78 50 49 67" stroke-dasharray="3 4"/>
+              <rect x="13" y="46" width="20" height="17" rx="3"/>
+              <circle cx="23" cy="54.5" r="4"/>
+              <path class="modality-icon-fill" d="m33 51 10-5v17l-10-5Z"/>
+              <path class="modality-icon-soft" d="M43 46 78 18M43 63l35 21" stroke-dasharray="3 4"/>
+              <circle class="modality-icon-fill" cx="78" cy="18" r="3"/>
+              <circle class="modality-icon-fill" cx="107" cy="35" r="3"/>
+              <circle class="modality-icon-fill" cx="107" cy="67" r="3"/>
+              <circle class="modality-icon-fill" cx="78" cy="84" r="3"/>
+            </svg>
+          </div>
+          <h3>Visual Geometry Learning</h3>
+          <p>Recover 3D structure and track motion across views.</p>
+        </a>
+      </div>
+      <div class="research-tabs" id="finetuned-model-tabs" role="group" aria-labelledby="finetuned-models-title">
+        <button type="button" id="finetuned-world-model" aria-pressed="true" aria-controls="finetuned-world-model-panel" data-model="world-model">Interactive World Model</button>
+        <button type="button" id="finetuned-visual-geometry" aria-pressed="false" aria-controls="finetuned-visual-geometry-panel" data-model="visual-geometry">Visual Geometry Learning</button>
+      </div>
+      <div id="finetuned-world-model-panel" role="region" aria-labelledby="finetuned-world-model" data-model-panel="world-model">
+        <div class="showcase-heading"><h4 id="finetuned-world-model-title">World Model (Finetuned Helios)</h4></div>
+        <div class="world-model-grid" id="world-model-grid" role="group" aria-labelledby="finetuned-world-model-title"></div>
+        <div class="showcase-heading"><h4 id="finetuned-multiview-world-model-title">Multi-View World Model (Finetuned Helios)</h4></div>
+        <div class="multi-view-world-model-grid" id="multi-view-world-model-grid" role="group" aria-labelledby="finetuned-multiview-world-model-title"></div>
+        <div class="showcase-heading"><h4 id="finetuned-panoramic-world-model-title">Panoramic World Model (Finetuned LTX-2.0)</h4></div>
+        <div class="panoramic-grid panoramic-world-model-grid" id="panoramic-world-model-grid" role="group" aria-labelledby="finetuned-panoramic-world-model-title"></div>
+      </div>
+      <div id="finetuned-visual-geometry-panel" role="region" aria-labelledby="finetuned-visual-geometry" data-model-panel="visual-geometry" hidden>
+        <div class="showcase-heading"><h4 id="finetuned-reconstruction-title">Reconstruction (Finetuned Pi3 and Fast-FoundationStereo)</h4></div>
+        <div class="reconstruction-gallery" id="reconstruction-gallery" role="region" aria-labelledby="finetuned-reconstruction-title"></div>
+        <div class="showcase-heading"><h4 id="finetuned-tracking-title">Tracking (Finetuned TAPIP3D)</h4></div>
+        <div class="tracking-grid finetuned-tracking-grid" id="finetuned-tracking-grid" role="group" aria-labelledby="finetuned-tracking-title"></div>
+      </div>
+    </section>
+    <section class="section resources" id="resources" aria-labelledby="resources-title">
+      <div class="section-heading"><h4 class="eyebrow">CONTINUE EXPLORING</h4><h2 id="resources-title">Project resources</h2><p class="section-lead">Research materials will be linked here as they become available.</p></div>
+      <div class="resource-list">
+        <a class="resource-card resource-link" role="link" data-resource="paper" aria-disabled="true" tabindex="-1"><img class="feature-icon brand-icon" src="assets/icons/arxiv.svg" alt="" width="27" height="27"><div><h3>Technical report</h3><p>The ideas, design, and evaluation behind GameRealm.</p></div><span class="resource-status">Coming soon</span><span class="resource-arrow" aria-hidden="true">↗</span></a>
+        <a class="resource-card resource-link" data-resource="code" href="https://github.com/weiguangzhao/GameRealm" target="_blank" rel="noopener noreferrer"><img class="feature-icon brand-icon" src="assets/icons/github.svg" alt="" width="27" height="27"><div><h3>Research code</h3><p>Implementations and tools for getting started.</p></div><span class="resource-status">AVAILABLE</span><span class="resource-arrow" aria-hidden="true">↗</span></a>
+        <a class="resource-card resource-link" role="link" data-resource="dataset" aria-disabled="true" tabindex="-1"><img class="feature-icon brand-icon" src="assets/icons/huggingface.svg" alt="" width="27" height="27"><div><h3>Dataset</h3><p>Data access, annotations, and documentation.</p></div><span class="resource-status">Coming soon</span><span class="resource-arrow" aria-hidden="true">↗</span></a>
+      </div>
+      <div class="citation-block" id="citation-block" hidden><div><h3>Citation</h3><button class="copy-button" type="button" id="copy-citation">Copy BibTeX</button></div><pre><code id="citation-code"></code></pre><span id="copy-status" role="status"></span></div>
+    </section>
+  </main>
+  <footer class="site-footer page-width"><a class="brand" href="#top" aria-label="GameRealm home"><svg class="icon" aria-hidden="true"><use href="#icon-cube"/></svg><span>GameRealm</span></a><p id="footer-note">A research project on grounded world understanding.</p><div class="footer-bottom"><span>© <span id="year">2026</span> GameRealm</span><a href="#top">Back to top ↑</a></div></footer>
+  <noscript><p class="noscript-note">JavaScript is off. The project overview and navigation are available; interactive previews and configured resources require JavaScript.</p></noscript>
+</body>
+</html>
