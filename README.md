@@ -8,4 +8,3 @@ understanding, including world modeling, 3D reconstruction, and point tracking.
 
 [![GameRealm project video](media/teaser-poster.jpg)](media/teaser.mp4)
 
-[Watch or download the project video](media/teaser.mp4) · 25 seconds
