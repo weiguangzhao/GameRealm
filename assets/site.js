@@ -29,10 +29,24 @@
   setText('#footer-note', config.footerNote);
   if (typeof config.title === 'string' && config.title.trim()) {
     const title = config.title.trim();
+    const pageTitle = `${title}: ${config.tagline || 'Grounding Visual Learning in Interactive Games'}`;
     const heading = $('#hero-title');
-    if (heading) heading.textContent = title;
+    if (heading) {
+      const breakBefore = heading.dataset.titleBreak;
+      const breakIndex = breakBefore ? pageTitle.indexOf(` ${breakBefore}`) : -1;
+      if (breakIndex > 0) {
+        const createTitleLine = text => {
+          const line = document.createElement('span');
+          line.className = 'title-line';
+          line.textContent = text;
+          return line;
+        };
+        heading.replaceChildren(createTitleLine(pageTitle.slice(0, breakIndex)),
+          document.createTextNode(' '), createTitleLine(pageTitle.slice(breakIndex + 1)));
+      } else heading.textContent = pageTitle;
+    }
     $$('.brand > span:last-child').forEach(el => { el.textContent = title; });
-    document.title = `${title} — ${config.tagline || 'Grounding World Understanding in Games'}`;
+    document.title = pageTitle;
     $('meta[property="og:title"]').content = document.title;
     $('.brand').setAttribute('aria-label', `${title} home`);
   }
@@ -780,17 +794,65 @@
 
   if (Array.isArray(config.authors) && config.authors.length) {
     const holder = $('#authors');
+    const list = document.createElement('div');
+    list.className = 'author-list';
+    list.setAttribute('role', 'list');
+    list.setAttribute('aria-label', 'Authors');
+    const affiliations = new Map();
+    let hasCorrespondingAuthor = false;
     config.authors.forEach(author => {
       if (!author || typeof author.name !== 'string' || !author.name.trim()) return;
       const wrapper = document.createElement('span');
-      const url = safeURL(author.url);
-      const name = document.createElement(url ? 'a' : 'span');
+      wrapper.className = 'author-entry';
+      wrapper.setAttribute('role', 'listitem');
+      const name = document.createElement('span');
+      name.className = 'author-name';
       name.textContent = author.name;
-      if (url) { name.href = url; name.target = '_blank'; name.rel = 'noopener noreferrer'; }
-      if (author.affiliation) name.title = String(author.affiliation);
-      wrapper.append(name); holder.append(wrapper);
+      wrapper.append(name);
+      const affiliation = typeof author.affiliation === 'string' ? author.affiliation.trim() : '';
+      if (affiliation) {
+        if (!affiliations.has(affiliation)) affiliations.set(affiliation, affiliations.size + 1);
+        const index = document.createElement('sup');
+        index.className = 'author-affiliation-index';
+        index.textContent = String(affiliations.get(affiliation));
+        name.title = affiliation;
+        wrapper.append(index);
+      }
+      if (author.corresponding === true) {
+        const marker = document.createElement('sup');
+        marker.className = 'author-affiliation-index author-corresponding-marker';
+        marker.textContent = '*';
+        marker.title = 'Corresponding author';
+        marker.setAttribute('aria-label', 'Corresponding author');
+        wrapper.append(marker);
+        hasCorrespondingAuthor = true;
+      }
+      list.append(wrapper);
     });
-    holder.hidden = holder.childElementCount === 0;
+    holder.replaceChildren(list);
+    if (affiliations.size) {
+      const institutions = document.createElement('div');
+      institutions.className = 'author-affiliations';
+      institutions.setAttribute('role', 'list');
+      institutions.setAttribute('aria-label', 'Affiliations');
+      affiliations.forEach((index, affiliation) => {
+        const institution = document.createElement('span');
+        institution.setAttribute('role', 'listitem');
+        const marker = document.createElement('sup');
+        marker.className = 'author-affiliation-index';
+        marker.textContent = String(index);
+        institution.append(marker, document.createTextNode(affiliation));
+        institutions.append(institution);
+      });
+      holder.append(institutions);
+    }
+    if (hasCorrespondingAuthor) {
+      const note = document.createElement('p');
+      note.className = 'author-note';
+      note.textContent = '* Corresponding authors';
+      holder.append(note);
+    }
+    holder.hidden = list.childElementCount === 0;
   }
   if (typeof config.citation === 'string' && config.citation.trim()) {
     $('#citation-block').hidden = false; $('#citation-code').textContent = config.citation;

@@ -7,7 +7,7 @@ window.GAMEREALM_CONTENT = {
   title: "GameRealm",
   // Local-file entry points use this running HTTP preview for interactive 3D.
   localPreviewURL: "http://10.22.24.33:8000/",
-  tagline: "Grounding World Understanding in Games",
+  tagline: "Grounding Visual Learning in Interactive Games",
   heroDescription: "From interactive worlds to grounded intelligence. A research platform connecting game-based data with world modeling, 3D reconstruction, and point tracking.",
   // Optional hero video. Leave src empty to keep the original animated artwork.
   heroVideo: { src: "media/teaser.mp4", poster: "media/teaser-poster.jpg", label: "GameRealm introduction" },
@@ -208,8 +208,21 @@ window.GAMEREALM_CONTENT = {
     code: { url: "https://github.com/weiguangzhao/GameRealm", label: "Research code" },
     dataset: { url: "", label: "Dataset" }
   },
-  // Add the confirmed author list when ready. An empty list stays hidden.
-  authors: [], // Example: [{ name: "Author Name", url: "https://example.com", affiliation: "Institution" }]
+  // Author order and affiliations shown below the project title, without links.
+  authors: [
+    { name: "Weiguang Zhao", affiliation: "Shanghai AI Lab" },
+    { name: "Yifan Wang", affiliation: "Shanghai AI Lab" },
+    { name: "Ni Yang", affiliation: "Shanghai AI Lab" },
+    { name: "Yating Wang", affiliation: "Shanghai AI Lab" },
+    { name: "Xingyu Miao", affiliation: "Shanghai AI Lab" },
+    { name: "Yankai Jiang", affiliation: "Shanghai AI Lab" },
+    { name: "Mulin Yu", affiliation: "Shanghai AI Lab" },
+    { name: "Tao Lu", affiliation: "Shanghai AI Lab" },
+    { name: "Haoyu Guo", affiliation: "Shanghai AI Lab", corresponding: true },
+    { name: "Junting Dong", affiliation: "Shanghai AI Lab", corresponding: true },
+    { name: "Weinan Zhang", affiliation: "SJTU" },
+    { name: "Chunhua Shen", affiliation: "ZJU" }
+  ],
   // Add the final BibTeX entry, not a provisional publication claim.
   citation: "",
   footerNote: "A research project on grounded world understanding."

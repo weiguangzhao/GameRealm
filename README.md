@@ -1,4 +1,4 @@
-# GameRealm
+# GameRealm: Grounding Visual Learning in Interactive Games
 
 <p align="center">
   <a href="https://weiguangzhao.github.io/GameRealm.github.io/"><img src="assets/icons/home.svg" width="20" height="20" alt=""> Homepage</a>
