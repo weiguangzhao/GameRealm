@@ -206,7 +206,8 @@ window.GAMEREALM_CONTENT = {
   resources: {
     paper: { url: "", label: "Technical report" },
     code: { url: "https://github.com/weiguangzhao/GameRealm", label: "Research code" },
-    dataset: { url: "", label: "Dataset" }
+    dataset: { url: "", label: "Dataset" },
+    pi4: { url: "https://yyfz.github.io/pi4", label: "Pi4" }
   },
   // Author order and affiliations shown below the project title, without links.
   authors: [
