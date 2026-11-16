@@ -2,7 +2,7 @@
 
 
 <p align="center">
-  <a href="https://weiguangzhao.github.io/GameRealm.github.io/"><img src="assets/icons/home.svg" width="20" height="20" alt=""> Homepage</a>
+  <a href="weiguangzhao.github.io/GameRealm"><img src="assets/icons/home.svg" width="20" height="20" alt=""> Homepage</a>
   &nbsp;&nbsp;·&nbsp;&nbsp;
   <span title="Link coming soon"><img src="assets/icons/huggingface.svg" width="20" height="20" alt=""> Hugging Face </span>
   &nbsp;&nbsp;·&nbsp;&nbsp;
