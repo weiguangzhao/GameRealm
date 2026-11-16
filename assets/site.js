@@ -809,13 +809,18 @@
       name.className = 'author-name';
       name.textContent = author.name;
       wrapper.append(name);
-      const affiliation = typeof author.affiliation === 'string' ? author.affiliation.trim() : '';
-      if (affiliation) {
-        if (!affiliations.has(affiliation)) affiliations.set(affiliation, affiliations.size + 1);
+      const authorAffiliations = (Array.isArray(author.affiliation) ? author.affiliation : [author.affiliation])
+        .filter(affiliation => typeof affiliation === 'string')
+        .map(affiliation => affiliation.trim())
+        .filter(Boolean);
+      if (authorAffiliations.length) {
+        authorAffiliations.forEach(affiliation => {
+          if (!affiliations.has(affiliation)) affiliations.set(affiliation, affiliations.size + 1);
+        });
         const index = document.createElement('sup');
         index.className = 'author-affiliation-index';
-        index.textContent = String(affiliations.get(affiliation));
-        name.title = affiliation;
+        index.textContent = authorAffiliations.map(affiliation => affiliations.get(affiliation)).join(',');
+        name.title = authorAffiliations.join(', ');
         wrapper.append(index);
       }
       if (author.corresponding === true) {

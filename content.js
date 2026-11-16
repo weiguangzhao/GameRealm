@@ -221,8 +221,8 @@ window.GAMEREALM_CONTENT = {
     { name: "Tao Lu", affiliation: "Shanghai AI Lab" },
     { name: "Haoyu Guo", affiliation: "Shanghai AI Lab", corresponding: true },
     { name: "Junting Dong", affiliation: "Shanghai AI Lab", corresponding: true },
-    { name: "Weinan Zhang", affiliation: "SJTU" },
-    { name: "Chunhua Shen", affiliation: "ZJU" }
+    { name: "Weinan Zhang", affiliation: ["Shanghai AI Lab", "SJTU"] },
+    { name: "Chunhua Shen", affiliation: ["Shanghai AI Lab", "ZJU"] }
   ],
   // Add the final BibTeX entry, not a provisional publication claim.
   citation: "",
