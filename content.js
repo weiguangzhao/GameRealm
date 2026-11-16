@@ -10,7 +10,7 @@ window.GAMEREALM_CONTENT = {
   tagline: "Grounding Visual Learning in Interactive Games",
   heroDescription: "From interactive worlds to grounded intelligence. A research platform connecting game-based data with world modeling, 3D reconstruction, and point tracking.",
   // Optional hero video. Leave src empty to keep the original animated artwork.
-  heroVideo: { src: "media/teaser.mp4", poster: "media/teaser-poster.jpg", label: "GameRealm introduction" },
+  heroVideo: { src: "media/teaser.mp4", poster: "media/teaser-poster.jpg", label: "GameRealm introduction", autoplay: true },
   // Fixed conditioning inputs: eight i01 clips followed by four additional wm clips.
   // lookDirection is a normalized HUD direction: positive x right, positive y up.
   worldModelVideos: [

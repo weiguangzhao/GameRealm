@@ -903,7 +903,12 @@
     $('#hero-overlay').hidden = true;
     heroVideo.setAttribute('aria-label', config.heroVideo.label || 'GameRealm project teaser');
     const poster = safeURL(config.heroVideo.poster);
-    Media.bindNative(heroVideo, { src: videoURL, poster, isVisible: () => heroVisible });
+    Media.bindNative(heroVideo, {
+      src: videoURL,
+      poster,
+      isVisible: () => heroVisible,
+      autoplay: config.heroVideo.autoplay === true
+    });
     $('#scene-label').textContent = 'GameRealm in motion';
     heroVideo.addEventListener('error', () => {
       hasHeroVideo = false; heroVideo.hidden = true; heroVideo.removeAttribute('src');

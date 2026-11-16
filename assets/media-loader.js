@@ -129,8 +129,13 @@
   }
   function release(video) { handles.get(video)?.group?.release(); }
   function destroy(video) { handles.get(video)?.destroy(); }
-  function bindNative(video, { src, poster, isVisible = () => true }) {
+  function bindNative(video, { src, poster, isVisible = () => true, autoplay = false }) {
     const handle = register(video, { src, poster });
+    if (autoplay) {
+      video.autoplay = true;
+      video.muted = true;
+      video.setAttribute('muted', '');
+    }
     const trigger = document.createElement('button');
     trigger.type = 'button';
     trigger.className = 'media-play-trigger';
@@ -168,6 +173,7 @@
     video.addEventListener('error', () => { playback.release(); trigger.hidden = true; });
     const destroyHandle = handle.destroy;
     handle.destroy = () => { trigger.remove(); destroyHandle(); };
+    if (autoplay) play();
     return { element: video.parentElement, pause: () => playback.release(), play };
   }
   document.addEventListener('visibilitychange', () => { if (document.hidden) activeGroup?.release(); });
