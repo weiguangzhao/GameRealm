@@ -211,18 +211,18 @@ window.GAMEREALM_CONTENT = {
   },
   // Author order and affiliations shown below the project title, without links.
   authors: [
-    { name: "Weiguang Zhao", affiliation: "Shanghai AI Lab" },
-    { name: "Yifan Wang", affiliation: "Shanghai AI Lab" },
-    { name: "Ni Yang", affiliation: "Shanghai AI Lab" },
-    { name: "Yating Wang", affiliation: "Shanghai AI Lab" },
-    { name: "Xingyu Miao", affiliation: "Shanghai AI Lab" },
-    { name: "Yankai Jiang", affiliation: "Shanghai AI Lab" },
-    { name: "Mulin Yu", affiliation: "Shanghai AI Lab" },
-    { name: "Tao Lu", affiliation: "Shanghai AI Lab" },
-    { name: "Haoyu Guo", affiliation: "Shanghai AI Lab", corresponding: true },
-    { name: "Junting Dong", affiliation: "Shanghai AI Lab", corresponding: true },
-    { name: "Weinan Zhang", affiliation: ["Shanghai AI Lab", "SJTU"] },
-    { name: "Chunhua Shen", affiliation: ["Shanghai AI Lab", "ZJU"] }
+    { name: "Weiguang Zhao", affiliation: "Shanghai Artificial Intelligence Laboratory" },
+    { name: "Yifan Wang", affiliation: "Shanghai Artificial Intelligence Laboratory" },
+    { name: "Ni Yang", affiliation: "Shanghai Artificial Intelligence Laboratory" },
+    { name: "Yating Wang", affiliation: "Shanghai Artificial Intelligence Laboratory" },
+    { name: "Xingyu Miao", affiliation: "Shanghai Artificial Intelligence Laboratory" },
+    { name: "Yankai Jiang", affiliation: "Shanghai Artificial Intelligence Laboratory" },
+    { name: "Mulin Yu", affiliation: "Shanghai Artificial Intelligence Laboratory" },
+    { name: "Tao Lu", affiliation: "Shanghai Artificial Intelligence Laboratory" },
+    { name: "Haoyu Guo", affiliation: "Shanghai Artificial Intelligence Laboratory", corresponding: true },
+    { name: "Junting Dong", affiliation: "Shanghai Artificial Intelligence Laboratory", corresponding: true },
+    { name: "Weinan Zhang", affiliation: ["Shanghai Artificial Intelligence Laboratory", "Shanghai Jiao Tong University"] },
+    { name: "Chunhua Shen", affiliation: ["Shanghai Artificial Intelligence Laboratory", "Zhejiang University"] }
   ],
   // Add the final BibTeX entry, not a provisional publication claim.
   citation: "",
