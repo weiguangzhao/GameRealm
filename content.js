@@ -204,9 +204,9 @@ window.GAMEREALM_CONTENT = {
     }
   ],
   resources: {
-    paper: { url: "", label: "Technical report" },
+    paper: { url: "https://arxiv.org/abs/2611.23140", label: "Technical report" },
     code: { url: "https://github.com/weiguangzhao/GameRealm", label: "Research code" },
-    dataset: { url: "", label: "Dataset" },
+    dataset: { url: "https://huggingface.co/datasets/InternRobotics/GameRealm", label: "Dataset" },
     pi4: { url: "https://yyfz.github.io/pi4", label: "Pi4" }
   },
   // Author order and affiliations shown below the project title, without links.
